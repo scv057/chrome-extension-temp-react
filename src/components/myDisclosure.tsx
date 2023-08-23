@@ -2,7 +2,7 @@ import React from "react";
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 
-interface IDialog {
+export interface IDialog {
   question: string
   answer:string
 }
@@ -38,7 +38,7 @@ const MyDisclosure: React.FC<IProps> = ({dialogs})=> {
 
   return (
     <div className="w-full pt-4">
-      <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-2">
+      <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-2 max-h-64 min-h-[100px] overflow-scroll">
         {dialogs.map((dialog)=>{
           return <Dialog key={dialog.question} {...dialog}/>
         })}
