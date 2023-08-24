@@ -39,8 +39,8 @@ const MyDisclosure: React.FC<IProps> = ({dialogs})=> {
   return (
     <div className="w-full pt-4">
       <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-2 max-h-64 min-h-[100px] overflow-scroll">
-        {dialogs.map((dialog)=>{
-          return <Dialog key={dialog.question} {...dialog}/>
+        {dialogs.map((dialog, index)=>{
+          return <Dialog key={dialog.question + index} {...dialog}/>
         })}
       </div>
     </div>

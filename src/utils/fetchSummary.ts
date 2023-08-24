@@ -3,14 +3,19 @@ import fetchAnswer from "./fetchAnswer";
 import { IDialog } from "../components/myDisclosure";
 
 function fetchSubtitle(): string {
-  return "";
+  return "hahahah";
 }
 
-export default function fetchSummary(): IDialog {
+function fetchTitle(): string {
+  return 'hahahah'
+}
+
+export default async function fetchSummary(): Promise<IDialog> {
   let prompt = getConfig('defaultPrompt');
-  const title = '视频1';
+  const title = fetchTitle();
   let subtitle = fetchSubtitle();
-  const summary = fetchAnswer(
+
+  const summary = await fetchAnswer(
     `${ prompt }
   ${ subtitle }
   `)
