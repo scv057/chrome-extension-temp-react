@@ -1,22 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 
-
-async function mock(question: string) {
-  console.log(question);
-  return {
-    status: 200,
-    message: {
-      answer: "hahhhahaha"
-    }
-  }
-}
-
 interface IProps {
-  doSomething: (question: string) => void
+  ask: (question: string) => void
 }
 
-const MyTextures:React.FC<IProps> = ({doSomething})=> {
+const MyTextures:React.FC<IProps> = ({ask})=> {
   const [question, setQuestion] = useState('');
 
   return <div className={ classNames("col-span-full", "mx-auto", "w-full", "max-w-md") }>
@@ -36,7 +25,7 @@ const MyTextures:React.FC<IProps> = ({doSomething})=> {
     </div>
     <div className={"h-1 border-t my-4"}></div>
     <button className={classNames("float-right","px-2","py-1","bg-cyan-200", "rounded-xl", )}
-            onClick={()=>{doSomething(question);
+            onClick={()=>{ask(question);
               setQuestion('');}}
     >Send</button>
   </div>
