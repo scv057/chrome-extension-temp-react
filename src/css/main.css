@@ -2,3 +2,8 @@
 @tailwind utilities;
 @tailwind components;
 
+@layer components {
+    .button {
+        @apply float-right px-2 py-1 bg-cyan-200  rounded-xl mr-3
+    }
+}
