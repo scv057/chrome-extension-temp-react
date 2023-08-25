@@ -26,10 +26,10 @@ const App = () => {
   async function ask(question: string) {
     if (question === "") return;
     setDialogs([ ...dialogs, {question, answer: "Waiting for response"} ])
-    const answer = await fetchAnswer(question);
+    const {status, response} = await fetchAnswer(question);
     setDialogs([ ...dialogs, {
       question,
-      answer
+      answer: status==='success'? response?.reply: "Error"
     } ])
   }
 
