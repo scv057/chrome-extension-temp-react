@@ -25,25 +25,6 @@ const MyTextures:React.FC<IProps> = ({ask})=> {
       </textarea>
     </div>
     <div className={ "h-1 border-t my-4" }></div>
-
-    <button className={ classNames("button") }
-            onClick={ () => {
-              fetchBiliVideo('BV1fX4y1Q7Ux')
-            } }
-    >load video
-    </button>
-    <button className={"button"}
-    onClick={()=> {
-      fetchSubtitleUrls('BV1fX4y1Q7Ux', '1029248276');
-    }}>
-      subtitle
-    </button>
-    <button className={"button"}
-    onClick={()=> {
-      fetchSubtitle("");
-    }}>
-      subtitle2
-    </button>
     <button className={ classNames("button") }
             onClick={ () => {
               ask(question);
