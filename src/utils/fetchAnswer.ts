@@ -1,6 +1,6 @@
 import tokens from "../tokens";
 import axios from "axios";
-
+import {ResponseBody} from "./fetchBiliVideo";
 
 const {GPT_TOKEN} = tokens;
 
@@ -19,7 +19,7 @@ interface Chat {
 
 const messages: Array<Chat> = [];
 
-export default async function fetchAnswer(question: string): Promise<string> {
+export default async function fetchAnswer(question: string): Promise<ResponseBody<{reply: string}>> {
 
   messages.push({role: 'user', content: question})
 
@@ -32,9 +32,14 @@ export default async function fetchAnswer(question: string): Promise<string> {
     const {data: responseData} = res;
     const assistantReply = responseData?.choices[0]?.messages?.content;
     assistantReply && messages.push({role: 'assistant', content: assistantReply});
-    return assistantReply || 'Error';
+    return {
+      status: "success",
+      response: {reply: assistantReply}
+    }
   } catch (e) {
-    console.error(`Error ${ e }`);
-    return 'Error'
+    return {
+      status: 'error',
+      response: e
+    }
   }
 };
