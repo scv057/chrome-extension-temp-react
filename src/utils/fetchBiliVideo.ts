@@ -12,6 +12,18 @@ interface SuccessRes<T> {
 
 export type ResponseBody<T> = ErrorRes | SuccessRes<T>
 
+interface SubtitlesBody {
+  data: {
+    data: {
+      subtitle: {
+        subtitles: Array<{
+          subtitle_url: string
+        }>
+      }
+    }
+  }
+}
+
 export const biliApi = axios.create({
   baseURL: 'https://api.bilibili.com/x',
   withCredentials: true,
@@ -26,7 +38,7 @@ export default async function fetchBiliVideo(bvid?: string, aid?: string): Promi
   if (!aid && !bvid) return;
   try {
     const res = await biliApi.get('/web-interface/view', {params: {bvid}});
-    const {data} = res
+    const {data: { data }} = res
     const {desc, title, pages} = data;
     const cid = pages[0].cid;
 
@@ -42,9 +54,10 @@ export default async function fetchBiliVideo(bvid?: string, aid?: string): Promi
   }
 };
 
-export async function fetchSubtitleUrls(bvid: string, cid: string): Promise<ResponseBody<object>> {
+export async function fetchSubtitleUrls(bvid: string, cid: string): Promise<ResponseBody<SubtitlesBody>> {
   try {
     const response = await biliApi.get('/player/v2', {params: {bvid, cid}})
+    debugger
     return {
       status: 'success',
       response: response
@@ -61,6 +74,7 @@ export async function fetchSubtitle(url: string): Promise<ResponseBody<{subtitle
 
   try {
     const res = await axios.get(url);
+    debugger
     const {data} = res;
     return {status: 'success', response: {subtitle: normalize(data)}}
   } catch (e) {

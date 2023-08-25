@@ -7,7 +7,6 @@ import matchSubtitles from "./matchSubtitles";
 
 const videoID = getVideoId(document.URL);
 
-
 export default async function fetchSummary(): Promise<IDialog> {
   let prompt = getConfig('defaultPrompt');
   const {status: vStatus, response: vRes} = await fetchBiliVideo(videoID);
@@ -16,7 +15,7 @@ export default async function fetchSummary(): Promise<IDialog> {
 
   const {status: tStatus, response: tRes} = await fetchSubtitleUrls(videoID, cid);
   if (tStatus === 'error') return ;
-  const {data:{subtitles: subtitles}} = tRes;
+  const subtitles = tRes?.data?.data?.subtitle?.subtitles;
 
   const {status: sStatus, response: subtitle} = await fetchSubtitle(matchSubtitles(subtitles));
   if (sStatus === 'error') return ;
@@ -25,10 +24,16 @@ export default async function fetchSummary(): Promise<IDialog> {
     `${ prompt }
   ${ subtitle }
   `)
+
   if (res.status === 'success') {
     return {
       question: `summary of ${ title }`,
       answer: res.response.reply
+    }
+  } else {
+    return {
+      question: `summary of ${ title }`,
+      answer: "Error"
     }
   }
 };
