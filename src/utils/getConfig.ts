@@ -12,6 +12,7 @@ const config: Config = {
       - [Emoji] Bulletpoint
       
       Your task is to summarise the text I have given you in up to seven concise bullet points, starting with a short highlight. Choose an appropriate emoji for each bullet point. Use the text above: {{Title}} {{Transcript}}.
+      print it in Chinese.
     `
 };
 

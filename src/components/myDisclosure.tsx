@@ -1,6 +1,7 @@
 import React from "react";
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
+import ReactMarkdown from "react-markdown";
 
 export interface IDialog {
   question: string
@@ -25,7 +26,7 @@ const Dialog: React.FC<IDialog> = ({question, answer}) => {
           />
         </Disclosure.Button>
         <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-          { answer }
+          <ReactMarkdown children={answer}/>
         </Disclosure.Panel>
       </>
     ) }

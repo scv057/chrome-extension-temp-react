@@ -15,15 +15,24 @@ export default async function fetchSummary(): Promise<IDialog> {
 
   const {status: tStatus, response: tRes} = await fetchSubtitleUrls(videoID, cid);
   if (tStatus === 'error') return ;
+  // todo 字幕url的过滤提取
   const subtitles = tRes?.data?.data?.subtitle?.subtitles;
 
-  const {status: sStatus, response: subtitle} = await fetchSubtitle(matchSubtitles(subtitles));
-  if (sStatus === 'error') return ;
+  let subtitle = "";
 
-  const res = await fetchAnswer(
-    `${ prompt }
-  ${ subtitle }
-  `)
+  if (subtitles && subtitles.length) {
+    const {status: sStatus, response} = await fetchSubtitle(matchSubtitles(subtitles));
+    if (sStatus === 'error') return ;
+    subtitle = response?.subtitle;
+  }
+
+
+  const q = `
+  title: ${title}
+  Transcript: ${subtitle}
+  `;
+
+  const res = await fetchAnswer(q)
 
   if (res.status === 'success') {
     return {

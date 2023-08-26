@@ -57,7 +57,6 @@ export default async function fetchBiliVideo(bvid?: string, aid?: string): Promi
 export async function fetchSubtitleUrls(bvid: string, cid: string): Promise<ResponseBody<SubtitlesBody>> {
   try {
     const response = await biliApi.get('/player/v2', {params: {bvid, cid}})
-    debugger
     return {
       status: 'success',
       response: response
@@ -74,7 +73,6 @@ export async function fetchSubtitle(url: string): Promise<ResponseBody<{subtitle
 
   try {
     const res = await axios.get(url);
-    debugger
     const {data} = res;
     return {status: 'success', response: {subtitle: normalize(data)}}
   } catch (e) {

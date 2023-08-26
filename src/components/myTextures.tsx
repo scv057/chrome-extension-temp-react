@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-import fetchBiliVideo, { fetchSubtitle, fetchSubtitleUrls } from "../utils/fetchBiliVideo";
+
 
 interface IProps {
   ask: (question: string) => void
