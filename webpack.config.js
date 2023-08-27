@@ -2,12 +2,13 @@ const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
+const pages = ['content-script', 'option'];
+
 module.exports = {
-  entry: {
-    'content-script': './src/scripts/index.jsx',
-    // "popup": "./src/popup/popup.js",
-    // "option": "./src/options/option.js",
-  },
+  entry: pages.reduce((config, page)=>{
+    config[page] = `./src/${page}/${page}.js`;
+    return config
+  }, {}),
   mode: 'development',
   module: {
     rules: [
@@ -23,20 +24,19 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: ['.js', 'jsx','.ts', '.tsx'],
   },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
-    new HtmlWebpackPlugin(),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {from: '', to: ''},
-    //   ],
-    // }),
-  ],
+  ].concat(pages.map(page=>{return new HtmlWebpackPlugin({
+    inject: true,
+    template: `./src/${page}/${page}.html`,
+    filename: `${page}.html`,
+    chunks: [page]
+  })})),
   devServer: {
     compress: true,
     port: 9000,
