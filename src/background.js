@@ -16,9 +16,8 @@ chrome.runtime.onInstalled.addListener((details)=>{
     }})
 })
 
-chrome.action.onClicked.addListener((tab) => {
-  // chrome.scripting.executeScript({
-  //   target: {tabId: tab.id},
-  //   files: ['content-script.js']
-  // });
+chrome.runtime.onMessage.addListener(function(message) {
+  if (message.type === "openOptionPage"){
+    chrome.runtime.openOptionsPage();
+  }
 });
