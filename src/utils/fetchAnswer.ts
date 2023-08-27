@@ -1,12 +1,14 @@
 import axios from "axios";
 import {ResponseBody} from "./fetchBiliVideo";
+import { IConfig } from "../option/app";
 
-export async function getConfigFromStorage(){
-  const res = await chrome.storage.local.get('config');
+export async function getConfigFromStorage(): Promise<IConfig>{
+  const res = await chrome?.storage?.local?.get('config');
   return res.config;
 }
 
-const {GPT_TOKEN, mission_prompt: prompt} = await getConfigFromStorage();
+// @ts-ignore:next-line
+const {GPT_TOKEN, mission_prompt: prompt} = (async function (): Promise<IConfig>{return await getConfigFromStorage()})();
 
 const gptAPI = axios.create({
   baseURL: 'https://api.openai.com/v1',
@@ -15,8 +17,6 @@ const gptAPI = axios.create({
     "Authorization": `Bearer ${ GPT_TOKEN }`,
   },
 });
-
-// let prompt = getConfig('mission_prompt');
 
 interface Chat {
   role: 'system' | 'user' | 'assistant'

@@ -4,6 +4,12 @@
 
 @layer components {
     .button {
-        @apply float-right px-2 py-1 bg-cyan-200  rounded-xl mr-3
+        @apply px-2 py-1 bg-cyan-200  rounded-xl mr-3 inline-block
+    }
+}
+
+@layer utilities {
+    .pointer-all {
+        pointer-events: all;
     }
 }

@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import MyDisclosure from "../components/myDisclosure";
 import MyTextures from "../components/myTextures";
-import {CloudIcon} from "@heroicons/react/20/solid";
+import {CloudIcon, Cog6ToothIcon, ArrowUpCircleIcon} from "@heroicons/react/20/solid";
 import fetchSummary from "../utils/fetchSummary";
 import fetchAnswer from "../utils/fetchAnswer";
 
@@ -31,7 +31,9 @@ const App = () => {
   }
 
   return <div
-    className={ classNames("mx-auto", "w-full", "max-w-md", "p-4", "z-10", "fixed", "right-4", "top-1/4", "bg-green-400") }>
+    className={ classNames("my-1","mx-auto", "w-full", "max-w-md", "p-4",
+      "pointer-all",
+      "bg-green-400") }>
     <div
       className={ classNames("px-4", "w-full", "h-full", "bg-cyan-200", "bg-gradient-to-bl", "rounded-2xl", "mx-auto", "w-full", "max-w-md") }>
       <div className={ classNames("flex", "flex-row", "items-center", "self-start") }>
@@ -40,7 +42,12 @@ const App = () => {
         ) }/>
         <div className={ classNames("flex", "justify-evenly") }>
           <button className={ "mr-5" } onClick={ summarize }>SUMMARY</button>
-          <button className={ "mr-5" } onClick={ openOptionsPage }>OPEN</button>
+          <button className={ "mr-5" }>
+            <ArrowUpCircleIcon className={classNames("h-8", "w-8", "text-gray-900")} />
+          </button>
+          <button className={ "mr-5" } onClick={ openOptionsPage }>
+            <Cog6ToothIcon className={classNames("h-8", "w-8", "text-gray-900")}/>
+          </button>
         </div>
       </div>
 

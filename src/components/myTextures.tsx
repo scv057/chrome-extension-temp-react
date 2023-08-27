@@ -25,13 +25,15 @@ const MyTextures:React.FC<IProps> = ({ask})=> {
       </textarea>
     </div>
     <div className={ "h-1 border-t my-4" }></div>
-    <button className={ classNames("button") }
-            onClick={ () => {
-              ask(question);
-              setQuestion('');
-            } }
-    >Send
-    </button>
+    <div className={"text-right"}>
+      <button className={ classNames("button") }
+              onClick={ () => {
+                ask(question);
+                setQuestion('');
+              } }
+      >Send
+      </button>
+    </div>
   </div>;
 };
 

@@ -8,12 +8,10 @@ const panel = document.createElement('div');
 const root = createRoot(panel);
 root.render(<App/>);
 
-const b = document.querySelector("#app > div.video-container-v1 >" +
-    " div.right-container.is-in-large-ab > div > div.up-panel-container")
-
-
 setTimeout(()=>{
-  document.body.appendChild(panel)
-}, 0)
+  const parent = document.querySelector("div.right-container-inner")
+  const box = document.querySelector("#danmukuBox")
+  box && parent &&parent.insertBefore(panel, box) || document.body.appendChild(panel)
+}, 2000)
 
 
