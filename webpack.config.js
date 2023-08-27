@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
-const pages = ['content-script', 'option'];
+const pages = ['content-script', 'option', 'popup'];
 
 module.exports = {
   entry: pages.reduce((config, page)=>{
@@ -31,12 +31,24 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
-  ].concat(pages.map(page=>{return new HtmlWebpackPlugin({
-    inject: true,
-    template: `./src/${page}/${page}.html`,
-    filename: `${page}/${page}.html`,
-    chunks: [page]
-  })})),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/asset'),
+        },
+          path.resolve(__dirname, "src", "manifest.json"),
+          path.resolve(__dirname, "src", "README.md"),
+          path.resolve(__dirname, "src", "background.js")
+      ],
+    }),
+  ].concat(pages.map(page => {
+    return new HtmlWebpackPlugin({
+      inject: true,
+      template: `./src/${page}/${page}.html`,
+      filename: `${page}/${page}.html`,
+      chunks: [page],
+    });
+  })),
   devServer: {
     compress: true,
     port: 9000,

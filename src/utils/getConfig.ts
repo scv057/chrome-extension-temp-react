@@ -1,4 +1,4 @@
-import tokens from "../asset/tokens";
+import tokens from "../asset/secrete/tokens";
 
 export interface IConfig {
   'GPT_TOKEN': string,
