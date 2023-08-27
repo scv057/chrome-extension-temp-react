@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Hello Extensions",
-  "description": "Base Level Extension",
+  "name": "Video Summary GPT",
+  "description": "Video Summary GPT",
   "version": "1.0",
   "action": {
     "default_icon": {
@@ -9,19 +9,22 @@
       "128": "icons/yellow-cat-128.png",
       "512": "icons/yellow-cat-512.png"
     },
-    "default-title": "Click to show an alert"
+    "default-title": "open option page",
+    "default_popup": "option/option.html"
   },
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
+  "options_page": "option/option.html",
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": ["https://*.bilibili.com/video/*"],
-      "js": ["scripts/content-script.js"],
+      "js": ["content-script/content-script.js"],
       "all_frames": false,
       "run_at": "document_idle",
       "world": "ISOLATED"

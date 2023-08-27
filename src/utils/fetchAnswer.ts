@@ -1,9 +1,12 @@
-import tokens from "../tokens";
 import axios from "axios";
 import {ResponseBody} from "./fetchBiliVideo";
-import getConfig from "./getConfig";
 
-const {GPT_TOKEN} = tokens;
+export async function getConfigFromStorage(){
+  const res = await chrome.storage.local.get('config');
+  return res.config;
+}
+
+const {GPT_TOKEN, mission_prompt: prompt} = await getConfigFromStorage();
 
 const gptAPI = axios.create({
   baseURL: 'https://api.openai.com/v1',
@@ -13,7 +16,7 @@ const gptAPI = axios.create({
   },
 });
 
-let prompt = getConfig('defaultPrompt');
+// let prompt = getConfig('mission_prompt');
 
 interface Chat {
   role: 'system' | 'user' | 'assistant'

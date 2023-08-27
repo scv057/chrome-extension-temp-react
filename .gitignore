@@ -118,4 +118,4 @@ dist
 
 .idea
 tokens.json
-*/tokens.js
+src/asset/tokens.js

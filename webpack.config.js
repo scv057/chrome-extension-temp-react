@@ -27,14 +27,14 @@ module.exports = {
     extensions: ['.js', 'jsx','.ts', '.tsx'],
   },
   output: {
-    filename: '[name].js',
+    filename: '[name]/[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
   ].concat(pages.map(page=>{return new HtmlWebpackPlugin({
     inject: true,
     template: `./src/${page}/${page}.html`,
-    filename: `${page}.html`,
+    filename: `${page}/${page}.html`,
     chunks: [page]
   })})),
   devServer: {

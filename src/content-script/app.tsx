@@ -3,18 +3,11 @@ import classNames from "classnames";
 import MyDisclosure from "../components/myDisclosure";
 import MyTextures from "../components/myTextures";
 import {CloudIcon} from "@heroicons/react/20/solid";
-import getVideo from "../utils/getVideoId";
 import fetchSummary from "../utils/fetchSummary";
 import fetchAnswer from "../utils/fetchAnswer";
 
 
 const App = () => {
-  const [ dialogVisible, setDialogVisible ] = useState(true);
-
-  const videoID = useMemo(() => {
-    return getVideo(document.URL)
-  }, [ document.URL ]);
-
   const [ dialogs, setDialogs ] = useState([]);
 
   async function summarize() {
@@ -33,6 +26,12 @@ const App = () => {
     } ])
   }
 
+  function openOptionsPage(){
+    chrome.runtime.openOptionsPage ? chrome.runtime.openOptionsPage() : window.open(chrome.runtime.getURL(
+      'option.html'
+    ));
+  }
+
   return <div
     className={ classNames("mx-auto", "w-full", "max-w-md", "p-4", "z-10", "fixed", "right-4", "top-1/4", "bg-green-400") }>
     <div
@@ -43,12 +42,12 @@ const App = () => {
         ) }/>
         <div className={ classNames("flex", "justify-evenly") }>
           <button className={ "mr-5" } onClick={ summarize }>SUMMARY</button>
-          <button className={ "mr-5" } onClick={ () => setDialogVisible(!dialogVisible) }>OPEN</button>
+          <button className={ "mr-5" } onClick={ openOptionsPage }>OPEN</button>
         </div>
       </div>
 
     </div>
-    <div className={ classNames(dialogVisible ? 'block' : 'hidden') }>
+    <div className={ classNames( 'block') }>
       <MyDisclosure dialogs={ dialogs }/>
       <MyTextures ask={ ask }/>
     </div>

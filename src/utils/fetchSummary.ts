@@ -1,4 +1,3 @@
-import getConfig from "./getConfig";
 import fetchAnswer from "./fetchAnswer";
 import { IDialog } from "../components/myDisclosure";
 import getVideoId from "./getVideoId";
@@ -8,7 +7,6 @@ import matchSubtitles from "./matchSubtitles";
 const videoID = getVideoId(document.URL);
 
 export default async function fetchSummary(): Promise<IDialog> {
-  let prompt = getConfig('defaultPrompt');
   const {status: vStatus, response: vRes} = await fetchBiliVideo(videoID);
   if (vStatus === 'error') return ;
   const {desc, title, cid} = vRes;
