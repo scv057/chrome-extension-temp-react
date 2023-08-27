@@ -28,7 +28,7 @@ const App = () => {
 
   function openOptionsPage(){
     chrome.runtime.openOptionsPage ? chrome.runtime.openOptionsPage() : window.open(chrome.runtime.getURL(
-      'option.html'
+      'option/option.html'
     ));
   }
 

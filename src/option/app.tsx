@@ -1,6 +1,11 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import classNames from "classnames";
-import getConfig, { IConfig } from "../utils/getConfig";
+
+export interface IConfig {
+  'GPT_TOKEN': string,
+  'mission_prompt': string
+}
+
 
 function isEmpty(obj: object): boolean{
   return !Object.keys(obj).length
@@ -12,18 +17,15 @@ export default function App() {
   function saveConfig(configs: IConfig) {
     chrome.storage.local.set({config: configs})
       .then(() => {
-        console.log("configs", configs);
         console.log('saved');
       })
   };
 
-  const defaultConfig= useMemo(()=>getConfig(), []);
   const [ config, setConfig ] = useState<IConfig>({GPT_TOKEN: "", mission_prompt: ""});
 
   useEffect(() => {
     chrome.storage.local.get('config').then(result => {
-      console.log("result", result);
-      setConfig(isEmpty(result) ? defaultConfig : result.config as IConfig)
+      setConfig(isEmpty(result) ? {mission_prompt: '', GPT_TOKEN: ''} : result.config as IConfig)
     })
   }, []);
 
