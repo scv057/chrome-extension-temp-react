@@ -55,7 +55,7 @@ const App = () => {
 
   return <div
     className={ classNames("my-1","mx-auto", "w-full", "max-w-md", "p-4",
-      "z-10", "fixed", "right-4", "top-1/4",
+      // "z-10", "fixed", "right-4", "top-1/4",
       "pointer-all",
       "bg-green-400") }>
     <div
