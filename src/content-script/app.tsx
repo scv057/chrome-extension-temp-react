@@ -5,6 +5,22 @@ import MyTextures from "../components/myTextures";
 import {CloudIcon, Cog6ToothIcon, ArrowUpCircleIcon} from "@heroicons/react/20/solid";
 import fetchSummary from "../utils/fetchSummary";
 import fetchAnswer from "../utils/fetchAnswer";
+import saveToNotion from "../utils/fetchNotion";
+import { markdownToBlocks } from "@tryfabric/martian";
+
+
+interface IChat {
+  answer: string;
+  question: string;
+}
+
+function normalize(dialogs: IChat[]){
+  let c = dialogs.reduce((pre, d)=>{
+    return `${pre} \n\n ## ${d.question} \n\n ${d.answer}`
+  }, "")
+  console.log(c);
+  return markdownToBlocks(c);
+}
 
 
 const App = () => {
@@ -26,12 +42,20 @@ const App = () => {
     } ])
   }
 
+  async function save(){
+    const {status, response} = await saveToNotion(`summary of ${"Video"}` ,normalize(dialogs));
+    if (status === 'success'){
+      console.log("文章保存成功");
+    }
+  }
+
   function openOptionsPage(){
     chrome.runtime.sendMessage({type: 'openOptionPage'});
   }
 
   return <div
     className={ classNames("my-1","mx-auto", "w-full", "max-w-md", "p-4",
+      "z-10", "fixed", "right-4", "top-1/4",
       "pointer-all",
       "bg-green-400") }>
     <div
@@ -42,7 +66,7 @@ const App = () => {
         ) }/>
         <div className={ classNames("flex", "justify-evenly") }>
           <button className={ "mr-5" } onClick={ summarize }>SUMMARY</button>
-          <button className={ "mr-5" }>
+          <button className={ "mr-5" } onClick={ save }>
             <ArrowUpCircleIcon className={classNames("h-8", "w-8", "text-gray-900")} />
           </button>
           <button className={ "mr-5" } onClick={ openOptionsPage }>

@@ -15,6 +15,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@tryfabric/martian": "^1.2.4",
     "@types/chrome": "^0.0.243",
     "@types/lodash": "^4.14.197",
     "axios": "^1.4.0",
@@ -22,13 +23,15 @@
     "classnames": "^2.3.2",
     "css-loader": "^6.8.1",
     "loadsh": "^0.0.4",
+    "path-browserify": "^1.0.1",
     "postcss": "^8.4.28",
     "postcss-loader": "^7.3.3",
     "postcss-preset-env": "^9.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.7",
-    "style-loader": "^3.3.3"
+    "style-loader": "^3.3.3",
+    "url": "^0.11.1"
   },
   "devDependencies": {
     "@types/node": "^20.4.4",

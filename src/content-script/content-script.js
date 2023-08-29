@@ -12,6 +12,6 @@ setTimeout(()=>{
   const parent = document.querySelector("div.right-container-inner")
   const box = document.querySelector("#danmukuBox")
   box && parent &&parent.insertBefore(panel, box) || document.body.appendChild(panel)
-}, 2000)
+}, 5000)
 
 

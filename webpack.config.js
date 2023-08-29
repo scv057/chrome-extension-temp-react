@@ -24,6 +24,7 @@ module.exports = {
     ],
   },
   resolve: {
+    fallback:{ 'path': require.resolve('path-browserify')},
     extensions: ['.js', 'jsx','.ts', '.tsx'],
   },
   output: {
@@ -35,10 +36,11 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'src/asset'),
+          to: path.resolve(__dirname, 'dist/asset')
         },
           path.resolve(__dirname, "src", "manifest.json"),
           path.resolve(__dirname, "src", "README.md"),
-          path.resolve(__dirname, "src", "background.js")
+          path.resolve(__dirname, "src", "background.js"),
       ],
     }),
   ].concat(pages.map(page => {
