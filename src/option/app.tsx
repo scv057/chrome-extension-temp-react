@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import {DocumentDuplicateIcon} from "@heroicons/react/20/solid"
+import { ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+
 // import FormItem from "../components/formItem";
 
 export interface IConfig {
@@ -31,8 +34,28 @@ export default function App() {
     chrome?.storage?.local?.set({config: {...config, ...configs}})
       .then(() => {
         setIsSaved(true);
-        console.log('saved');
-      })
+        toast.success('🦄 Wow so easy!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }).catch(()=>{
+      toast.error('save failed!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    });
   }
 
   const [ config, setConfig ] = useState<IConfig>({NOTION_PAGE: "", NOTION_API_KEY: "", GPT_TOKEN: "", mission_prompt: "", prompt_english_learning:""});
@@ -52,6 +75,20 @@ export default function App() {
   }
 
   return <div className={ classNames("mx-auto", "w-full", "max-w-3xl", "m-6") }>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
+    {/* Same as */}
+    <ToastContainer />
     <div className={ classNames("text-4xl") }>
       Option Page
     </div>

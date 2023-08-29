@@ -7,6 +7,8 @@ import fetchSummary from "../utils/fetchSummary";
 import fetchAnswer from "../utils/fetchAnswer";
 import saveToNotion from "../utils/fetchNotion";
 import { markdownToBlocks } from "@tryfabric/martian";
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 interface IChat {
@@ -58,6 +60,16 @@ const App = () => {
       // "z-10", "fixed", "right-4", "top-1/4",
       "pointer-all",
       "bg-green-400") }>
+    <ToastContainer position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"/>
     <div
       className={ classNames("px-4", "w-full", "h-full", "bg-cyan-200", "bg-gradient-to-bl", "rounded-2xl", "mx-auto", "w-full", "max-w-md") }>
       <div className={ classNames("flex", "flex-row", "items-center", "self-start") }>
